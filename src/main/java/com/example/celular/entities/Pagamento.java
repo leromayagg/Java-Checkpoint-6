@@ -30,6 +30,7 @@ public class Pagamento {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant dataPagamento;
     
+    //Um para Um
     @OneToOne
     @MapsId
     private Pedido pedido;

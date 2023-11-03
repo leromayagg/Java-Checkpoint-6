@@ -33,7 +33,7 @@ public class Pedido {
     private Instant dataPedido;
     private PedidoStatus status;
 
-
+    //Muitos para Um
     @ManyToOne
     @JoinColumn(columnDefinition = "cliente_id")
     private Usuario cliente;

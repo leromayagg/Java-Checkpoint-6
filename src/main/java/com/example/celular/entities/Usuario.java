@@ -7,7 +7,7 @@ import java.util.Objects;
 
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,12 +28,14 @@ public class Usuario {
     private String sobrenome;
 
     @Column(unique = true)
+    @Email
     private String email;
     private String senha;
     private String pais;
     private LocalDate dataDeNascimento;
     private String telefone;
 
+    //Um para Muitos
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
