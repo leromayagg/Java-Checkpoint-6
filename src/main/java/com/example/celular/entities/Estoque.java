@@ -1,23 +1,12 @@
 package com.example.celular.entities;
 
+import java.util.Objects;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "tb_estoque")
-@NoArgsConstructor
-@Getter
-@Setter
 public class Estoque {
 
     @EmbeddedId
@@ -26,16 +15,9 @@ public class Estoque {
     private Integer quantidade;
     private double preco;
 
-    public Estoque(Pedido pedido, Produto produto, Integer quantidade, double preco){
-        id.setPedido(pedido);
-        id.setProduto(produto);
-        this.quantidade = quantidade;
-        this.preco = preco;
-
-    }
-
-    @OneToMany(mappedBy = "id.estoque")
-    public Set<Estoque> itens = new HashSet<>();
+    
+    /*@OneToMany(mappedBy = "id.estoque")
+    public Set<Estoque> estoque = new HashSet<>();*/
 
     public Pedido getPedido() {
         return id.getPedido();
@@ -51,5 +33,63 @@ public class Estoque {
 
     public void setProduto(Produto produto){
         id.setProduto(produto);
+    }
+    
+    public Estoque() {
+    }
+
+
+    public Estoque(Pedido pedido, Produto produto, Integer quantidade, double preco){
+        id.setPedido(pedido);
+        id.setProduto(produto);
+        this.quantidade = quantidade;
+        this.preco = preco;
+
+    }
+
+
+    public EstoquePK getId() {
+        return id;
+    }
+
+
+    public void setId(EstoquePK id) {
+        this.id = id;
+    }
+
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+
+    public double getPreco() {
+        return preco;
+    }
+
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Estoque estoque = (Estoque) o;
+
+        return Objects.equals(id, estoque.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

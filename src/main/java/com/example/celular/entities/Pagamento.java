@@ -1,6 +1,7 @@
 package com.example.celular.entities;
 
 import java.time.Instant;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,4 +35,19 @@ public class Pagamento {
     @OneToOne
     @MapsId
     private Pedido pedido;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pagamento pagamento = (Pagamento) o;
+
+        return Objects.equals(id, pagamento.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }
